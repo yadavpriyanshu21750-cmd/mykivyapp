@@ -5,11 +5,14 @@ package.domain = org.test
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas
 version = 0.1
-requirements = python3,kivy,urllib3,certifi
+requirements = python3==3.11.9,kivy,urllib3,certifi
 orientation = portrait
 fullscreen = 0
 android.archs = arm64-v8a, armeabi-v7a
 android.allow_backup = True
+android.api = 33
+android.minapi = 21
+android.ndk = 25b
 
 [buildozer]
 log_level = 2
