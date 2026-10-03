@@ -25,16 +25,12 @@ jobs:
           pip install --upgrade pip wheel setuptools
           pip install "cython<3.0" buildozer
 
-      - name: Pre-accept Android SDK Licenses
-        run: |
-          mkdir -p ~/.buildozer/android/platform/android-sdk/licenses
-          echo -e "8933bad161af65ca73a108750702677761a26ff1\nd56f5187479451eabf01fb78af6dfcb131a6481e\n24333f8a63b682449dd410dd1ab4542900f9b01b" > ~/.buildozer/android/platform/android-sdk/licenses/android-sdk-license
-          echo -e "84831b9409646a918e30573bab4c9c91346d8abd\n504667f4c0de7af1a06de9f4b1727b84351f2910" > ~/.buildozer/android/platform/android-sdk/licenses/android-sdk-preview-license
-
-      - name: Run Buildozer
+      - name: Run Buildozer using GitHub Runner Android SDK
         run: |
           source .buildozer_venv/bin/activate
-          buildozer -v android debug
+          export ANDROIDSDK="$ANDROID_HOME"
+          export ANDROIDNDK="$ANDROID_NDK_LATEST_HOME"
+          yes | buildozer -v android debug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
