@@ -25,12 +25,10 @@ jobs:
           pip install --upgrade pip wheel setuptools
           pip install "cython<3.0" buildozer
 
-      - name: Run Buildozer using GitHub Runner Android SDK
+      - name: Run Buildozer
         run: |
           source .buildozer_venv/bin/activate
-          export ANDROIDSDK="$ANDROID_HOME"
-          export ANDROIDNDK="$ANDROID_NDK_LATEST_HOME"
-          yes | buildozer -v android debug
+          buildozer -v android debug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
